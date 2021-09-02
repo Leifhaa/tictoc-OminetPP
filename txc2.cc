@@ -39,6 +39,7 @@ void Txc2::initialize()
         // which will be the name of the message object'
         cMessage *msg = new cMessage("tictocMsg");
         send(msg, "out");
+        EV << "Sending initial message\n";
     }
 }
 
@@ -47,4 +48,5 @@ void Txc2::handleMessage(cMessage *msg){
     //we just send it to the other module, through gate 'out' because both 'tic' and 'toc' does the same,
     //the message will bounce between the two.
     send(msg, "out");
+    EV << "Received message `" << msg->getName() << "', sending it out again\n";
 }
