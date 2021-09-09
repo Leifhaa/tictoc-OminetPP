@@ -36,7 +36,10 @@ OBJS = \
     $O/txc3.o \
     $O/txc4.o \
     $O/txc5.o \
-    $O/txc6.o
+    $O/txc6.o \
+    $O/txc7.o \
+    $O/txc8.o \
+    $O/txc9.o
 
 # Message files
 MSGFILES =

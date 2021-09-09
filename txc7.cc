@@ -1,9 +1,10 @@
 /*
- * txc6.cc
+ * txc7.cc
  *
- *  Created on: 4 Sep 2021
+ *  Created on: 9 Sep 2021
  *      Author: Leifh
  */
+
 
 #include <string.h>
 #include <omnetpp.h>
@@ -11,8 +12,7 @@
 using namespace omnetpp;
 
 
-
-class Txc6 : public cSimpleModule
+class Txc7 : public cSimpleModule
 {
     private:
         cMessage *event; // pointer to the event object which we'll use for timing
@@ -25,9 +25,9 @@ class Txc6 : public cSimpleModule
 };
 
 //The module class need to be registered with OMNeT++
-Define_Module(Txc6);
+Define_Module(Txc7);
 
-void Txc6::initialize()
+void Txc7::initialize()
 {
     //Initialize is called at the beginning of the simulation.
     //To bootstrap the tic-toc-tic-toc process, one of the models needs
@@ -47,7 +47,7 @@ void Txc6::initialize()
     }
 }
 
-void Txc6::handleMessage(cMessage *msg){
+void Txc7::handleMessage(cMessage *msg){
     if (msg == event){
         //Retrieved a self-message.
         EV << "Wait period is over, sending back message\n";
@@ -55,12 +55,22 @@ void Txc6::handleMessage(cMessage *msg){
         tictocMsg = nullptr;
     }
     else{
-        //Retrieved message from partner. We remember its
-        // pointer in the tictocMsg variable, then schedule our self-message
-        // to come back to us in 1s simulated time.
-        EV << "Message arrived, starting to wait 1 sec...\n";
-        tictocMsg = msg;
-        scheduleAt(simTime()+1.0, event);
-    }
+        //Simulate sometimes "losing" a packet
+        if (uniform(0, 1) < 0.1){
+            EV << "\"Losing\" message\n";
+            delete msg;
+        }
+        else{
+            //Set delay time
+            simtime_t delay = par("delayTime");
 
+            //Retrieved message from partner. We remember its
+            // pointer in the tictocMsg variable, then schedule our self-message
+                // to come back to us in 1s simulated time.
+            EV << "Message arrived, starting to wait " << delay << " sec...\n";
+
+            tictocMsg = msg;
+            scheduleAt(simTime()+ delay, event);
+        }
+    }
 }
