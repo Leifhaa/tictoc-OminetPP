@@ -34,6 +34,7 @@ OBJS = \
     $O/txc1.o \
     $O/txc10.o \
     $O/txc11.o \
+    $O/txc12.o \
     $O/txc2.o \
     $O/txc3.o \
     $O/txc4.o \
