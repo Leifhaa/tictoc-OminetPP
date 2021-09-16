@@ -36,6 +36,7 @@ simple Toc8
 
 network Tictoc8
 {
+    @display("bgb=426,234");
     submodules:
         tic: Tic8 {
             parameters:
@@ -43,7 +44,7 @@ network Tictoc8
         }
         toc: Toc8 {
             parameters:
-                @display("i=,gold");
+                @display("i=,gold;p=266,61");
         }
     connections:
         tic.out --> {  delay = 100ms; } --> toc.in;
