@@ -35,6 +35,7 @@ OBJS = \
     $O/txc10.o \
     $O/txc11.o \
     $O/txc12.o \
+    $O/txc13.o \
     $O/txc2.o \
     $O/txc3.o \
     $O/txc4.o \
@@ -42,10 +43,14 @@ OBJS = \
     $O/txc6.o \
     $O/txc7.o \
     $O/txc8.o \
-    $O/txc9.o
+    $O/txc9.o \
+    $O/tictoc13_m.o \
+    $O/TicTocMsg13_m.o
 
 # Message files
-MSGFILES =
+MSGFILES = \
+    tictoc13.msg \
+    TicTocMsg13.msg
 
 # SM files
 SMFILES =
